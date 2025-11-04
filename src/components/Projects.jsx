@@ -46,6 +46,14 @@ export default function Projects() {
     setOpen(true);
   };
 
+  const handleGlowMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    e.currentTarget.style.setProperty('--mx', `${x}%`);
+    e.currentTarget.style.setProperty('--my', `${y}%`);
+  };
+
   return (
     <section id="projects" className="relative z-10 mx-auto max-w-6xl px-6 py-24 text-cyan-50">
       <div className="mb-10 flex items-end justify-between gap-4">
@@ -65,6 +73,7 @@ export default function Projects() {
         {PROJECTS.map((p) => (
           <div
             key={p.title}
+            onMouseMove={handleGlowMove}
             className="group relative overflow-hidden rounded-2xl border border-cyan-400/20 bg-white/5 p-5 shadow-[0_0_40px_rgba(0,255,255,0.08)] backdrop-blur-md transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_0_60px_rgba(0,255,255,0.25)]"
           >
             <div className="pointer-events-none absolute -inset-1 rounded-2xl opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100" style={{
